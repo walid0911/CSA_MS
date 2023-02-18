@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: backend
+
+  datasource:
+    url: jdbc:oracle:thin:@//db:1521/EE.oracle.docker
+    username: system
+    password: oracle
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.OracleDialect
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+    show-sql: true

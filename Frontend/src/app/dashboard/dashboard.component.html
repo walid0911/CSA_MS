@@ -1,0 +1,38 @@
+<main>
+  <form (ngSubmit)="onSubmit()">
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" name="nom" [(ngModel)]="nom"><br>
+
+    <label for="prenom">Prenom:</label>
+    <input type="text" id="prenom" name="prenom" [(ngModel)]="prenom"><br>
+
+    <label for="date">Date:</label>
+    <input type="date" id="date" name="date" [(ngModel)]="dateNaissance"><br>
+
+    <button type="submit">Ajouter</button>
+  </form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Identite</th>
+      <th>Nom</th>
+      <th>Prenom</th>
+      <th>Date de naissance</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of data">
+      <td>{{ item.usrId }}</td>
+      <td>{{ item.lastName }}</td>
+      <td>{{ item.firstName }}</td>
+      <td>{{ item.birthDate }}</td>
+      <td>
+        <button type="delete" (click)="deleteUser(item.usrId)">Delete</button>
+        <button type="update">Update</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>

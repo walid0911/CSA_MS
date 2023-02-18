@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: frontend
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+
+  db:
+    image: loliconneko/oracle-ee-11g
+    container_name: db
+    volumes:
+      - db-vol:/u01/app/oracle
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+
+  backend:
+    container_name: backend
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@//db:1521/EE.oracle.docker
+      - SPRING_DATASOURCE_USERNAME=system
+      - SPRING_DATASOURCE_PASSWORD=oracle
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  db-vol:
+    driver: local
